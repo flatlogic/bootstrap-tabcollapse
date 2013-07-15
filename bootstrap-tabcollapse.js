@@ -43,14 +43,14 @@
     /* TAB-COLLAPSE PLUGIN DEFINITION
      * ===================== */
 
-    $.fn.tabCollapse = function ( option ) {
+    $.fn.tabCollapse = function ( ) {
         return this.each(function () {
             var $this = $(this),
                 $headings =  $this.find('li:not(.dropdown) [data-toggle="tab"], li:not(.dropdown) [data-toggle="pill"]');
             var accordionHtml = accordionTemplate($this.attr('id') + '-accordion', $headings);
-            $('.container').append(accordionHtml);
+            $this.after(accordionHtml);
             $this.addClass('hidden-phone');
-            $this.find('+ .tab-content').addClass('hidden-phone');
+            $this.siblings('.tab-content').addClass('hidden-phone');
         })
     };
 
