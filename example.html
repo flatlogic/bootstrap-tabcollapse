@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>bootstrap tabcollapse.js</title>
+    <link href="lib/css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="lib/css/bootstrap/responsive.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta charset="utf-8">
+</head>
+<body>
+<div class="container" style="margin-top: 50px;">
+    <ul id="myTab" class="nav nav-tabs">
+        <li><a href="#home" data-toggle="tab">Home</a></li>
+        <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="#dropdown3" data-toggle="tab">@fat</a></li>
+                <li><a href="#dropdown4" data-toggle="tab">@mdo</a></li>
+            </ul>
+        </li>
+    </ul>
+    <div id="myTabContent" class="tab-content" >
+        <div class="tab-pane fade" id="home">
+            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
+        </div>
+        <div class="tab-pane fade in active" id="profile">
+            <p>Light Blue - is a next generation admin template based on the latest Metro design. There are few reasons we want to tell you, why we have created it:
+                We didn't like the darkness of most of admin templates, so we created this light one. We didn't like the high contrast of most of admin templates, so we created this unobtrusive one.
+                We searched for a solution of how to make widgets look like real widgets, so we decided that deep background - is what makes widgets look real.</p>
+        </div>
+        <div class="tab-pane fade" id="dropdown3">
+            <p>Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
+        </div>
+        <div class="tab-pane fade" id="dropdown4">
+            <p>They sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater. Lomo wolf viral, mustache readymade thundercats keffiyeh craft beer marfa ethical. Wolf salvia freegan, sartorial keffiyeh echo park vegan.</p>
+        </div>
+    </div>
+</div>
+<!-- LIB -->
+<!-- jQuery and friends -->
+<script type="text/javascript" src="lib/js/jquery-1.10.1.min.js"> </script>
+<script type="text/javascript" src="lib/js/jquery-migrate-1.2.1.min.js"> </script>
+
+<!-- Bootstrap -->
+<script type="text/javascript" src="lib/js/bootstrap/bootstrap-transition.js"></script>
+<script type="text/javascript" src="lib/js/bootstrap/bootstrap-tab.js"></script>
+<script type="text/javascript" src="lib/js/bootstrap/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="lib/js/bootstrap/bootstrap-collapse.js"></script>
+
+<!-- Bootstrap TabCollapse-->
+<script type="text/javascript" src="bootstrap-tabcollapse.js"></script>
+
+<script type="text/javascript">
+    $('#myTab').tabCollapse();
+</script>
+</body>
+</html>
