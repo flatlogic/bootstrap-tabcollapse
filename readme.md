@@ -1,4 +1,43 @@
-bootstrap-tabcollapse
-=====================
+Bootstrap Tab Collapse
+======================
 
-Bootstrap Tab Collapse plugin. Switches bootstrap tabs component to collapse for small screens
+Small bootstrap plugin that switches bootstrap tabs component to collapse component for small screens.
+
+How it works
+------------
+
+The most obvious way: bootstrap tab collapse generates accordion markup and appends it right away after tabs component.
+Tabs component is given `hidden-phone`-class and accordion component is given `visible-phone`-class. That's it.
+
+Use
+------------
+
+Lets say you have your tabs component right from bootstrap's site:
+
+    <ul id="myTab" class="nav nav-tabs">
+      <li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+      <li><a href="#profile" data-toggle="tab">Profile</a></li>
+      ...
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="home">
+            <p>Raw denim you probably haven't...</p>
+        </div>
+        <div class="tab-pane fade" id="profile">
+            <p>Food truck fixie locavore, accus...</p>
+        </div>
+        ...
+    </div>
+
+To activate tab collapse just include **bootstrap-tabcollapse.js** somewhere in your file and call:
+
+    $('#myTab').tabCollapse();
+
+If you want to specify the class that is given to accordion and tabs components you can do by passing options to `tabCollapse`:
+
+    $('#myTab').tabCollapse({
+        tabsClass: 'hidden-tablet',
+        accordionClass: 'visible-tablet'
+    });
+
+The default class is `hidden-phone`. So it means that tabs component will be switched to accordion for 767px and below. You can define your own classes and use them.
