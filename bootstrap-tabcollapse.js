@@ -29,8 +29,8 @@
             '</div>';
     }
 
-    function accordionTemplate(id, $headings){
-        var accordionTemplate = '<div class="accordion visible-phone" id="' + id +'">';
+    function accordionTemplate(id, $headings, clazz){
+        var accordionTemplate = '<div class="accordion ' + clazz + '" id="' + id +'">';
         $headings.each(function(){
             var $heading = $(this);
             accordionTemplate += accordionGroupTemplate(id, $heading);
@@ -43,15 +43,21 @@
     /* TAB-COLLAPSE PLUGIN DEFINITION
      * ===================== */
 
-    $.fn.tabCollapse = function ( ) {
+    $.fn.tabCollapse = function (options) {
         return this.each(function () {
             var $this = $(this),
                 $headings =  $this.find('li:not(.dropdown) [data-toggle="tab"], li:not(.dropdown) [data-toggle="pill"]');
-            var accordionHtml = accordionTemplate($this.attr('id') + '-accordion', $headings);
+            options = $.extend({}, $.fn.tabCollapse.defaults, options);
+            var accordionHtml = accordionTemplate($this.attr('id') + '-accordion', $headings, options.accordionClass);
             $this.after(accordionHtml);
-            $this.addClass('hidden-phone');
-            $this.siblings('.tab-content').addClass('hidden-phone');
+            $this.addClass(options.tabsClass);
+            $this.siblings('.tab-content').addClass(options.tabsClass);
         })
     };
+
+    $.fn.tabCollapse.defaults = {
+        accordionClass: 'visible-phone',
+        tabsClass: 'hidden-phone'
+    }
 
 }(window.jQuery);
