@@ -17,7 +17,7 @@
 
         return '<div class="accordion-group">' +
             '   <div class="accordion-heading">' +
-            '       <a class="accordion-toggle" data-toggle="collapse" data-parent="#' + parentId + '" href="#' + groupId + '">' +
+            '       <a class="accordion-toggle ' + (active ? '' : 'collapsed') + '" data-toggle="collapse" data-parent="#' + parentId + '" href="#' + groupId + '">' +
             '           ' + $heading.html() +
             '       </a>' +
             '   </div>' +
