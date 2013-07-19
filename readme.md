@@ -9,6 +9,8 @@ How it works
 The most obvious way: bootstrap tab collapse generates accordion markup and appends it right away after tabs component.
 Tabs component is given `hidden-phone`-class and accordion component is given `visible-phone`-class. That's it.
 
+[Demo](http://tabcollapse.okendoken.com/example.html)
+
 Use
 ------------
 
