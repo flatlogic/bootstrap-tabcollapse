@@ -7,7 +7,7 @@ How it works
 ------------
 
 The most obvious way: bootstrap tab collapse generates accordion markup and appends it right away after tabs component.
-Tabs component is given `hidden-phone`-class and accordion component is given `visible-phone`-class. That's it.
+Tabs component is given `hidden-xs`-class and accordion component is given `visible-xs`-class. That's it.
 
 [Demo](http://tabcollapse.okendoken.com/example.html)
 
@@ -38,8 +38,8 @@ To activate tab collapse just include **bootstrap-tabcollapse.js** somewhere in 
 If you want to specify the class that is given to accordion and tabs components you can do by passing options to `tabCollapse`:
 
     $('#myTab').tabCollapse({
-        tabsClass: 'hidden-tablet',
-        accordionClass: 'visible-tablet'
+        tabsClass: 'hidden-sm',
+        accordionClass: 'visible-sm'
     });
 
-The default class is `hidden-phone`. So it means that tabs component will be switched to accordion for 767px and below. You can define your own classes and use them.
+The default class is `hidden-xs`. So it means that tabs component will be switched to accordion for 767px and below. You can define your own classes and use them.
