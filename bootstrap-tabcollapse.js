@@ -15,14 +15,16 @@
             groupId = $tabContent.attr('id') + '-collapse';
 
 
-        return '<div class="accordion-group">' +
-            '   <div class="accordion-heading">' +
-            '       <a class="accordion-toggle ' + (active ? '' : 'collapsed') + '" data-toggle="collapse" data-parent="#' + parentId + '" href="#' + groupId + '">' +
+        return '<div class="panel panel-default">' +
+            '   <div class="panel-heading">' +
+            '      <h4 class="panel-title">' +
+            '        <a class="' + (active ? '' : 'collapsed') + '" data-toggle="collapse" data-parent="#' + parentId + '" href="#' + groupId + '">' +
             '           ' + $heading.html() +
-            '       </a>' +
+            '        </a>' +
+            '      </h4>' +
             '   </div>' +
-            '   <div id="' + groupId + '" class="accordion-body collapse ' + (active ? 'in' : '') + '">' +
-            '       <div class="accordion-inner">' +
+            '   <div id="' + groupId + '" class="panel-collapse collapse ' + (active ? 'in' : '') + '">' +
+            '       <div class="panel-body">' +
             '           ' + $tabContent.html() +
             '       </div>' +
             '   </div>' +
@@ -30,7 +32,7 @@
     }
 
     function accordionTemplate(id, $headings, clazz){
-        var accordionTemplate = '<div class="accordion ' + clazz + '" id="' + id +'">';
+        var accordionTemplate = '<div class="panel-group ' + clazz + '" id="' + id +'">';
         $headings.each(function(){
             var $heading = $(this);
             accordionTemplate += accordionGroupTemplate(id, $heading);
@@ -56,8 +58,8 @@
     };
 
     $.fn.tabCollapse.defaults = {
-        accordionClass: 'visible-phone',
-        tabsClass: 'hidden-phone'
+        accordionClass: 'visible-xs',
+        tabsClass: 'hidden-xs'
     }
 
 }(window.jQuery);
