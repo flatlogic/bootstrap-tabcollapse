@@ -35,7 +35,7 @@ To activate tab collapse just include **bootstrap-tabcollapse.js** somewhere in 
 
     $('#myTab').tabCollapse();
 
-If you want to specify the class that is given to accordion and tabs components you can do by passing options to `tabCollapse`:
+If you want to specify the class that is given to accordion and tabs components you can do so by passing options to `tabCollapse`:
 
     $('#myTab').tabCollapse({
         tabsClass: 'hidden-sm',
