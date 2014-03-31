@@ -1,7 +1,7 @@
 {
     "name": "bootstrap-tabcollapse",
     "main": "bootstrap-tabcollapse.js",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "homepage": "https://github.com/okendoken/bootstrap-tabcollapse",
     "authors": [
         "okendoken (http://flatlogic.com)"

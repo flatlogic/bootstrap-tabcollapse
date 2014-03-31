@@ -45,3 +45,17 @@ If you want to specify the class that is given to accordion and tabs components 
     });
 
 The default class is `hidden-xs`. So it means that tabs component will be switched to accordion for 767px and below. You can define your own classes and use them.
+
+Events
+------------
+
+There are four events tabcollapse triggers:
+*   **show-tabs.bs.tabcollapse** - triggered before tabs component is shown
+*   **shown-tabs.bs.tabcollapse** - triggered after tabs component is shown
+*   **shown-accordion.bs.tabcollapse** - triggered after accordion component is shown
+*   **shown-accordion.bs.tabcollapse** - triggered after accordion component is shown
+
+
+    $('#myTab').on('shown-accordion.bs.tabcollapse', function(){}(
+        alert('accordion is shown now!');
+    ));

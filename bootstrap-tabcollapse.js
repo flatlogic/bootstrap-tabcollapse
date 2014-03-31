@@ -47,6 +47,8 @@
     };
 
     TabCollapse.prototype.showTabs = function(){
+        this.$tabs.trigger($.Event('show-tabs.bs.tabcollapse'));
+
         var $panelBodies = this.$accordion.find('.panel-body');
         $panelBodies.each(function(){
             var $panelBody = $(this),
@@ -54,15 +56,21 @@
             $tabPane.append($panelBody.find('*').detach());
         });
         this.$accordion.html('');
+
+        this.$tabs.trigger($.Event('shown-tabs.bs.tabcollapse'));
     };
 
     TabCollapse.prototype.showAccordion = function(){
+        this.$tabs.trigger($.Event('show-accordion.bs.tabcollapse'));
+
         var $headings = this.$tabs.find('li:not(.dropdown) [data-toggle="tab"], li:not(.dropdown) [data-toggle="pill"]'),
             view = this;
         $headings.each(function(){
             var $heading = $(this);
             view.$accordion.append(view._createAccordionGroup(view.$accordion.attr('id'), $heading));
         });
+
+        this.$tabs.trigger($.Event('shown-accordion.bs.tabcollapse'));
     };
 
     TabCollapse.prototype._checkStateOnResize = function(){
