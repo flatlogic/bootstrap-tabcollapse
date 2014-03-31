@@ -29,6 +29,7 @@
             <p>Light Blue - is a next generation admin template based on the latest Metro design. There are few reasons we want to tell you, why we have created it:
                 We didn't like the darkness of most of admin templates, so we created this light one. We didn't like the high contrast of most of admin templates, so we created this unobtrusive one.
                 We searched for a solution of how to make widgets look like real widgets, so we decided that deep background - is what makes widgets look real.</p>
+            <button class="btn btn-lg btn-primary">Button with click event attached</button>
         </div>
         <div class="tab-pane fade" id="dropdown3">
             <p>Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
@@ -49,6 +50,9 @@
 <script type="text/javascript" src="../bootstrap-tabcollapse.js"></script>
 
 <script type="text/javascript">
+    $('button').on('click', function(){
+        alert('preserve attached java script data!');
+    });
     $('#myTab').tabCollapse();
 </script>
 </body>

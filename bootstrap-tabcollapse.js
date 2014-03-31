@@ -2,7 +2,88 @@
 
     "use strict";
 
-    function accordionGroupTemplate(parentId, $heading){
+    // TABCOLLAPSE CLASS DEFINITION
+    // ======================
+
+    var TabCollapse = function (el, options) {
+        this.options   = options;
+        this.$tabs  = $(el);
+
+        this._accordionVisible = false; //content is attached to tabs at first
+        this._initAccordion();
+        this._checkStateOnResize();
+
+        this.checkState();
+    };
+
+    TabCollapse.DEFAULTS = {
+        accordionClass: 'visible-xs',
+        tabsClass: 'hidden-xs',
+        accordionTemplate: function(heading, groupId, parentId, active){
+            return '<div class="panel panel-default">' +
+                '   <div class="panel-heading">' +
+                '      <h4 class="panel-title">' +
+                '        <a class="' + (active ? '' : 'collapsed') + '" data-toggle="collapse" data-parent="#' + parentId + '" href="#' + groupId + '">' +
+                '           ' + heading +
+                '        </a>' +
+                '      </h4>' +
+                '   </div>' +
+                '   <div id="' + groupId + '" class="panel-collapse collapse ' + (active ? 'in' : '') + '">' +
+                '       <div class="panel-body">' +
+                '       </div>' +
+                '   </div>' +
+                '</div>';
+        }
+    };
+
+    TabCollapse.prototype.checkState = function(){
+        if (this.$tabs.is(':visible') && this._accordionVisible){
+            this.showTabs();
+            this._accordionVisible = false;
+        } else if (this.$accordion.is(':visible') && !this._accordionVisible){
+            this.showAccordion();
+            this._accordionVisible = true;
+        }
+    };
+
+    TabCollapse.prototype.showTabs = function(){
+        var $panelBodies = this.$accordion.find('.panel-body');
+        $panelBodies.each(function(){
+            var $panelBody = $(this),
+                $tabPane = $panelBody.data('bs.tabcollapse.tabpane');
+            $tabPane.append($panelBody.find('*').detach());
+        });
+        this.$accordion.html('');
+    };
+
+    TabCollapse.prototype.showAccordion = function(){
+        var $headings = this.$tabs.find('li:not(.dropdown) [data-toggle="tab"], li:not(.dropdown) [data-toggle="pill"]'),
+            view = this;
+        $headings.each(function(){
+            var $heading = $(this);
+            view.$accordion.append(view._createAccordionGroup(view.$accordion.attr('id'), $heading));
+        });
+    };
+
+    TabCollapse.prototype._checkStateOnResize = function(){
+        var view = this;
+        $(window).resize(function(){
+            clearTimeout(view._resizeTimeout);
+            view._resizeTimeout = setTimeout(function(){
+                view.checkState();
+            }, 100);
+        })
+    };
+
+
+    TabCollapse.prototype._initAccordion = function(){
+        this.$accordion = $('<div class="panel-group ' + this.options.accordionClass + '" id="' + this.$tabs.attr('id') + '-accordion' +'"></div>');
+        this.$tabs.after(this.$accordion);
+        this.$tabs.addClass(this.options.tabsClass);
+        this.$tabs.siblings('.tab-content').addClass(this.options.tabsClass);
+    };
+
+    TabCollapse.prototype._createAccordionGroup = function(parentId, $heading){
         var tabSelector = $heading.attr('data-target'),
             active = $heading.parent().is('.active');
 
@@ -11,55 +92,31 @@
             tabSelector = tabSelector && tabSelector.replace(/.*(?=#[^\s]*$)/, ''); //strip for ie7
         }
 
-        var $tabContent = $(tabSelector),
-            groupId = $tabContent.attr('id') + '-collapse';
+        var $tabPane = $(tabSelector),
+            groupId = $tabPane.attr('id') + '-collapse',
+            $panel = $(this.options.accordionTemplate($heading.html(), groupId, parentId, active));
+        $panel.find('.panel-body').append($tabPane.find('*').detach())
+            .data('bs.tabcollapse.tabpane', $tabPane);
+
+        return $panel;
+    };
 
 
-        return '<div class="panel panel-default">' +
-            '   <div class="panel-heading">' +
-            '      <h4 class="panel-title">' +
-            '        <a class="' + (active ? '' : 'collapsed') + '" data-toggle="collapse" data-parent="#' + parentId + '" href="#' + groupId + '">' +
-            '           ' + $heading.html() +
-            '        </a>' +
-            '      </h4>' +
-            '   </div>' +
-            '   <div id="' + groupId + '" class="panel-collapse collapse ' + (active ? 'in' : '') + '">' +
-            '       <div class="panel-body">' +
-            '           ' + $tabContent.html() +
-            '       </div>' +
-            '   </div>' +
-            '</div>';
-    }
 
-    function accordionTemplate(id, $headings, clazz){
-        var accordionTemplate = '<div class="panel-group ' + clazz + '" id="' + id +'">';
-        $headings.each(function(){
-            var $heading = $(this);
-            accordionTemplate += accordionGroupTemplate(id, $heading);
-        });
-        accordionTemplate += '</div>';
-        return accordionTemplate;
-    }
+    // TABCOLLAPSE PLUGIN DEFINITION
+    // =======================
 
-
-    /* TAB-COLLAPSE PLUGIN DEFINITION
-     * ===================== */
-
-    $.fn.tabCollapse = function (options) {
+    $.fn.tabCollapse = function (option) {
         return this.each(function () {
-            var $this = $(this),
-                $headings =  $this.find('li:not(.dropdown) [data-toggle="tab"], li:not(.dropdown) [data-toggle="pill"]');
-            options = $.extend({}, $.fn.tabCollapse.defaults, options);
-            var accordionHtml = accordionTemplate($this.attr('id') + '-accordion', $headings, options.accordionClass);
-            $this.after(accordionHtml);
-            $this.addClass(options.tabsClass);
-            $this.siblings('.tab-content').addClass(options.tabsClass);
+            var $this   = $(this);
+            var data    = $this.data('bs.tabcollapse');
+            var options = $.extend({}, TabCollapse.DEFAULTS, $this.data(), typeof option == 'object' && option);
+
+            if (!data) $this.data('bs.tabcollapse', new TabCollapse(this, options));
         })
     };
 
-    $.fn.tabCollapse.defaults = {
-        accordionClass: 'visible-xs',
-        tabsClass: 'hidden-xs'
-    }
+    $.fn.tabCollapse.Constructor = TabCollapse;
+
 
 }(window.jQuery);
