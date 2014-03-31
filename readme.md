@@ -57,6 +57,6 @@ There are four events tabcollapse triggers:
 
 To attach event handler just call:
 
-    $('#myTab').on('shown-accordion.bs.tabcollapse', function(){}(
+    $('#myTab').on('shown-accordion.bs.tabcollapse', function(){
         alert('accordion is shown now!');
-    ));
+    });
