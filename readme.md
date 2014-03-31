@@ -50,11 +50,12 @@ Events
 ------------
 
 There are four events tabcollapse triggers:
-*   **show-tabs.bs.tabcollapse** - triggered before tabs component is shown
-*   **shown-tabs.bs.tabcollapse** - triggered after tabs component is shown
-*   **shown-accordion.bs.tabcollapse** - triggered after accordion component is shown
-*   **shown-accordion.bs.tabcollapse** - triggered after accordion component is shown
+-   **show-tabs.bs.tabcollapse** - triggered before tabs component is shown
+-   **shown-tabs.bs.tabcollapse** - triggered after tabs component is shown
+-   **shown-accordion.bs.tabcollapse** - triggered after accordion component is shown
+-   **shown-accordion.bs.tabcollapse** - triggered after accordion component is shown
 
+To attach event handler just call:
 
     $('#myTab').on('shown-accordion.bs.tabcollapse', function(){}(
         alert('accordion is shown now!');
