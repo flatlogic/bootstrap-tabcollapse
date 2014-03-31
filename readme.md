@@ -11,7 +11,7 @@ When accordion becomes (If accordion is) visible tabcollapse search for `.tab-pa
 accordion groups keeping all attached js data.
 Tabs component is given `hidden-xs`-class and accordion component is given `visible-xs`-class. That's it.
 
-[Demo](http://tabcollapse.okendoken.com/example.html)
+[Demo](http://tabcollapse.okendoken.com/example/example.html)
 
 Use
 ------------
