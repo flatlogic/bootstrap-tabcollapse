@@ -103,8 +103,8 @@
 
         var $tabPane = $(tabSelector),
             groupId = $tabPane.attr('id') + '-collapse',
-            $panel = $(this.options.accordionTemplate($heading.html(), groupId, parentId, active));
-        var $panelBody = $panel.find('.panel-body');
+            $panel = $(this.options.accordionTemplate($heading.html(), groupId, parentId, active)),
+            $panelBody = $panel.find('.panel-body');
         $panelBody.append($tabPane.html());
         $tabPane.find('*').detach();
         $panelBody.data('bs.tabcollapse.tabpane', $tabPane);
