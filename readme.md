@@ -60,3 +60,8 @@ To attach event handler just call:
     $('#myTab').on('shown-accordion.bs.tabcollapse', function(){
         alert('accordion is shown now!');
     });
+
+Contributors
+------------
+
+Thanks to [bdaenen](https://github.com/bdaenen) for contributing.
