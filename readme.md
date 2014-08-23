@@ -61,6 +61,13 @@ To attach event handler just call:
         alert('accordion is shown now!');
     });
 
+Attach an event handler when **either** tab or collapse is opened:
+------------
+
+    $(document).on("shown.bs.collapse shown.bs.tab", ".panel-collapse, a[data-toggle='tab']", function (e) {
+        alert('either tab or collapse opened - check arguments to distinguish ' + e);
+    });
+
 Contributors
 ------------
 
