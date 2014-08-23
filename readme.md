@@ -49,7 +49,7 @@ The default class is `hidden-xs`. So it means that tabs component will be switch
 Events
 ------------
 
-There are four events tabcollapse triggers:
+There are four events tabcollapse triggers (for **entire** component, not for single tabs or accordion groups!):
 -   **show-tabs.bs.tabcollapse** - triggered before tabs component is shown
 -   **shown-tabs.bs.tabcollapse** - triggered after tabs component is shown
 -   **show-accordion.bs.tabcollapse** - triggered before accordion component is shown
