@@ -7,7 +7,7 @@ How it works
 ------------
 
 The most obvious way: bootstrap tab collapse generates accordion markup and appends it right away after tabs component.
-When accordion becomes (If accordion is) visible tabcollapse search for `.tab-pane` and detaches their content to appropriate
+When accordion becomes (If accordion is) visible tabcollapse searchs for `.tab-pane` and detaches their content to appropriate
 accordion groups keeping all attached js data.
 Tabs component is given `hidden-xs`-class and accordion component is given `visible-xs`-class. That's it.
 
