@@ -15,10 +15,10 @@
     ],
     "license": "MIT",
     "dependencies": {
-        "bootstrap": ">= 3.0.0"
     },
     "ignore": [
         "**/.*",
-        "bower_components"
+        "bower_components",
+        "example"
     ]
 }
