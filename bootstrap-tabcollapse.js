@@ -29,7 +29,7 @@
                 '      </h4>' +
                 '   </div>' +
                 '   <div id="' + groupId + '" class="panel-collapse collapse ' + (active ? 'in' : '') + '">' +
-                '       <div class="panel-body">' +
+                '       <div class="panel-body js-tabcollapse-panel-body">' +
                 '       </div>' +
                 '   </div>' +
                 '</div>';
@@ -49,7 +49,7 @@
     TabCollapse.prototype.showTabs = function(){
         this.$tabs.trigger($.Event('show-tabs.bs.tabcollapse'));
 
-        var $panelBodies = this.$accordion.find('.panel-body');
+        var $panelBodies = this.$accordion.find('.js-tabcollapse-panel-body');
         $panelBodies.each(function(){
             var $panelBody = $(this),
                 $tabPane = $panelBody.data('bs.tabcollapse.tabpane');
