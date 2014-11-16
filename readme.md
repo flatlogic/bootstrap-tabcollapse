@@ -54,6 +54,12 @@ If you want to specify the class that is given to accordion and tabs components 
     });
 
 The default class is `hidden-xs`. So it means that tabs component will be switched to accordion for 767px and below. You can define your own classes and use them.
+You can also use multiple Bootstrap classes in order to, for example, show accordion for mobile + tablets and tabs for desktop+:
+
+    $('#myTab').tabCollapse({
+        tabsClass: 'hidden-sm hidden-xs',
+        accordionClass: 'visible-sm visible-xs'
+    });
 
 Events
 ------------
