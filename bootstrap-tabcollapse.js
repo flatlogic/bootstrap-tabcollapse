@@ -80,7 +80,7 @@
             view._resizeTimeout = setTimeout(function(){
                 view.checkState();
             }, 100);
-        })
+        });
     };
 
 
@@ -118,10 +118,10 @@
         return this.each(function () {
             var $this   = $(this);
             var data    = $this.data('bs.tabcollapse');
-            var options = $.extend({}, TabCollapse.DEFAULTS, $this.data(), typeof option == 'object' && option);
+            var options = $.extend({}, TabCollapse.DEFAULTS, $this.data(), typeof option === 'object' && option);
 
             if (!data) $this.data('bs.tabcollapse', new TabCollapse(this, options));
-        })
+        });
     };
 
     $.fn.tabCollapse.Constructor = TabCollapse;
