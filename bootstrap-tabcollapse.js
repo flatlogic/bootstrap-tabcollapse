@@ -13,7 +13,14 @@
         this._initAccordion();
         this._checkStateOnResize();
 
-        this.checkState();
+
+        // checkState() has gone to setTimeout for making it possible to attach listeners to
+        // shown-accordion.bs.tabcollapse event on page load.
+        // See https://github.com/flatlogic/bootstrap-tabcollapse/issues/23
+        var that = this;
+        setTimeout(function() {
+          that.checkState();
+        }, 0);
     };
 
     TabCollapse.DEFAULTS = {
