@@ -11,9 +11,10 @@
 
         this._accordionVisible = false; //content is attached to tabs at first
         this._initAccordion();
-        this._checkStateOnResize();
-
-        this.checkState();
+        if ( this.options.checkStateOnResize ) {
+            this._checkStateOnResize();
+            this.checkState();
+        }
     };
 
     TabCollapse.DEFAULTS = {
@@ -33,7 +34,8 @@
                 '       </div>' +
                 '   </div>' +
                 '</div>';
-        }
+        },
+        checkStateOnResize: true
     };
 
     TabCollapse.prototype.checkState = function(){
