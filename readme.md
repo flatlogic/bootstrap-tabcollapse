@@ -3,14 +3,6 @@ Bootstrap Tab Collapse
 
 Small bootstrap plugin that switches bootstrap tabs component to collapse component for small screens.
 
-Repository moved. Update your urls!
-------------
-
-We have transferred Bootstrap Tab Collapse to a new location under our organization account - https://github.com/flatlogic/bootstrap-tabcollapse. Though Gihub provides
-redirects from old urls, we strongly recommend updating any existing local clones to point to the new repository URL. You can
-do this by using `git remote` on the command line:
-
-    git remote set-url origin https://github.com/flatlogic/bootstrap-tabcollapse.git
 
 How it works
 ------------
@@ -20,7 +12,7 @@ When accordion becomes (If accordion is) visible tabcollapse searchs for `.tab-p
 accordion groups keeping all attached js data.
 Tabs component is given `hidden-xs`-class and accordion component is given `visible-xs`-class. That's it.
 
-[Demo](http://tabcollapse.okendoken.com/example/example.html)
+**[Demo](http://tabcollapse.okendoken.com/example/example.html)**
 
 Use
 ------------
