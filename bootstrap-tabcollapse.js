@@ -26,20 +26,18 @@
     TabCollapse.DEFAULTS = {
         accordionClass: 'visible-xs',
         tabsClass: 'hidden-xs',
-        accordionTemplate: function(heading, groupId, parentId, active){
-            return '<div class="panel panel-default">' +
-                '   <div class="panel-heading">' +
-                '      <h4 class="panel-title">' +
-                '        <a class="' + (active ? '' : 'collapsed') + '" data-toggle="collapse" data-parent="#' + parentId + '" href="#' + groupId + '">' +
-                '           ' + heading +
-                '        </a>' +
-                '      </h4>' +
-                '   </div>' +
-                '   <div id="' + groupId + '" class="panel-collapse collapse ' + (active ? 'in' : '') + '">' +
-                '       <div class="panel-body js-tabcollapse-panel-body">' +
-                '       </div>' +
-                '   </div>' +
-                '</div>';
+        accordionTemplate: function(heading, groupId, parentId, active) {
+            return  '<div class="panel panel-default">' +
+                    '   <div class="panel-heading">' +
+                    '      <h4 class="panel-title">' +
+                    '      </h4>' +
+                    '   </div>' +
+                    '   <div id="' + groupId + '" class="panel-collapse collapse ' + (active ? 'in' : '') + '">' +
+                    '       <div class="panel-body js-tabcollapse-panel-body">' +
+                    '       </div>' +
+                    '   </div>' +
+                    '</div>'
+
         }
     };
 
@@ -54,7 +52,16 @@
     };
 
     TabCollapse.prototype.showTabs = function(){
+        var view = this;
         this.$tabs.trigger($.Event('show-tabs.bs.tabcollapse'));
+
+        var $panelHeadings = this.$accordion.find('.js-tabcollapse-panel-heading').detach();
+        $panelHeadings.each(function() {
+            var $panelHeading = $(this),
+                $parentLi = $panelHeading.data('bs.tabcollapse.parentLi');
+            view._panelHeadingToTabHeading($panelHeading);
+            $parentLi.append($panelHeading);
+        });
 
         var $panelBodies = this.$accordion.find('.js-tabcollapse-panel-body');
         $panelBodies.each(function(){
@@ -73,11 +80,33 @@
         var $headings = this.$tabs.find('li:not(.dropdown) [data-toggle="tab"], li:not(.dropdown) [data-toggle="pill"]'),
             view = this;
         $headings.each(function(){
-            var $heading = $(this);
-            view.$accordion.append(view._createAccordionGroup(view.$accordion.attr('id'), $heading));
+            var $heading = $(this),
+                $parentLi = $heading.parent();
+            $heading.data('bs.tabcollapse.parentLi', $parentLi);
+            view.$accordion.append(view._createAccordionGroup(view.$accordion.attr('id'), $heading.detach()));
         });
 
         this.$tabs.trigger($.Event('shown-accordion.bs.tabcollapse'));
+    };
+
+    TabCollapse.prototype._panelHeadingToTabHeading = function($heading) {
+        var href = $heading.attr('href').replace(/-collapse$/g, '');
+        $heading.attr({
+            'data-toggle': 'tab',
+            'href': href,
+            'data-parent': ''
+        });
+        return $heading;
+    };
+
+    TabCollapse.prototype._tabHeadingToPanelHeading = function($heading, groupId, parentId, active) {
+        $heading.addClass('js-tabcollapse-panel-heading ' + (active ? '' : 'collapsed'));
+        $heading.attr({
+            'data-toggle': 'collapse',
+            'data-parent': '#' + parentId,
+            'href': '#' + groupId
+        });
+        return $heading;
     };
 
     TabCollapse.prototype._checkStateOnResize = function(){
@@ -100,7 +129,7 @@
 
     TabCollapse.prototype._createAccordionGroup = function(parentId, $heading){
         var tabSelector = $heading.attr('data-target'),
-            active = $heading.parent().is('.active');
+            active = $heading.data('bs.tabcollapse.parentLi').is('.active');
 
         if (!tabSelector) {
             tabSelector = $heading.attr('href');
@@ -109,7 +138,8 @@
 
         var $tabPane = $(tabSelector),
             groupId = $tabPane.attr('id') + '-collapse',
-            $panel = $(this.options.accordionTemplate($heading.html(), groupId, parentId, active));
+            $panel = $(this.options.accordionTemplate($heading, groupId, parentId, active));
+        $panel.find('.panel-heading > .panel-title').append(this._tabHeadingToPanelHeading($heading, groupId, parentId, active));
         $panel.find('.panel-body').append($tabPane.children('*').detach())
             .data('bs.tabcollapse.tabpane', $tabPane);
 
