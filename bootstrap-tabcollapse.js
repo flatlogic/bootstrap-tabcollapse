@@ -56,12 +56,33 @@
         this.$tabs.trigger($.Event('show-tabs.bs.tabcollapse'));
 
         var $panelHeadings = this.$accordion.find('.js-tabcollapse-panel-heading').detach();
+
         $panelHeadings.each(function() {
             var $panelHeading = $(this),
                 $parentLi = $panelHeading.data('bs.tabcollapse.parentLi');
-            view._panelHeadingToTabHeading($panelHeading);
+
+            var $oldHeading = view._panelHeadingToTabHeading($panelHeading);
+
+            $parentLi.removeClass('active');
+			if ($parentLi.parent().hasClass('dropdown-menu') && !$parentLi.siblings('li').hasClass('active')) {
+				$parentLi.parent().parent().removeClass('active');
+			}
+
+			if (!$oldHeading.hasClass('collapsed')) {
+				$parentLi.addClass('active');
+				if ($parentLi.parent().hasClass('dropdown-menu')) {
+					$parentLi.parent().parent().addClass('active');
+				}
+			} else {
+				$oldHeading.removeClass('collapsed');
+			}
+            
             $parentLi.append($panelHeading);
         });
+
+        if (!$('li').hasClass('active')) {
+        	$('li').first().addClass('active')
+        }
 
         var $panelBodies = this.$accordion.find('.js-tabcollapse-panel-body');
         $panelBodies.each(function(){
