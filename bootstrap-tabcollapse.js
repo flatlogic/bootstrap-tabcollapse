@@ -92,6 +92,20 @@
         });
         this.$accordion.html('');
 
+        if(this.options.updateLinks) {
+            var $tabContents = $(this.options.tabContentSelector) || this.$tabs.siblings('.tab-content')
+            $tabContents.find('[data-toggle-was="tab"], [data-toggle-was="pill"]').each(function() {
+                var $el = $(this);
+                var href = $el.attr('href').replace(/-collapse$/g, '');
+                $el.attr({
+                    'data-toggle': $el.attr('data-toggle-was'),
+                    'data-toggle-was': '',
+                    'data-parent': '',
+                    href: href
+                });
+            });
+        }
+
         this.$tabs.trigger($.Event('shown-tabs.bs.tabcollapse'));
     };
 
@@ -106,6 +120,21 @@
             $heading.data('bs.tabcollapse.parentLi', $parentLi);
             view.$accordion.append(view._createAccordionGroup(view.$accordion.attr('id'), $heading.detach()));
         });
+
+        if(this.options.updateLinks) {
+            var parentId = this.$accordion.attr('id');
+            var $selector = this.$accordion.find('.js-tabcollapse-panel-body');
+            $selector.find('[data-toggle="tab"], [data-toggle="pill"]').each(function() {
+                var $el = $(this);
+                var href = $el.attr('href') + '-collapse';
+                $el.attr({
+                    'data-toggle-was': $el.attr('data-toggle'),
+                    'data-toggle': 'collapse',
+                    'data-parent': '#' + parentId,
+                    href: href
+                });
+            });
+        }
 
         this.$tabs.trigger($.Event('shown-accordion.bs.tabcollapse'));
     };
@@ -145,7 +174,8 @@
         this.$accordion = $('<div class="panel-group ' + this.options.accordionClass + '" id="' + this.$tabs.attr('id') + '-accordion' +'"></div>');
         this.$tabs.after(this.$accordion);
         this.$tabs.addClass(this.options.tabsClass);
-        this.$tabs.siblings('.tab-content').addClass(this.options.tabsClass);
+        var $tabContents = $(this.options.tabContentSelector) || this.$tabs.siblings('.tab-content')
+        $tabContents.addClass(this.options.tabsClass);
     };
 
     TabCollapse.prototype._createAccordionGroup = function(parentId, $heading){
