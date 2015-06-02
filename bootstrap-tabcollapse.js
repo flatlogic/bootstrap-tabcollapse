@@ -93,7 +93,7 @@
         this.$accordion.html('');
 
         if(this.options.updateLinks) {
-            var $tabContents = $(this.options.tabContentSelector) || this.$tabs.siblings('.tab-content')
+            var $tabContents = this.getTabContentElement();
             $tabContents.find('[data-toggle-was="tab"], [data-toggle-was="pill"]').each(function() {
                 var $el = $(this);
                 var href = $el.attr('href').replace(/-collapse$/g, '');
@@ -107,6 +107,14 @@
         }
 
         this.$tabs.trigger($.Event('shown-tabs.bs.tabcollapse'));
+    };
+
+    TabCollapse.prototype.getTabContentElement = function(){
+        var $tabContents = $(this.options.tabContentSelector);
+        if($tabContents.length === 0) {
+            $tabContents = this.$tabs.siblings('.tab-content');
+        }
+        return $tabContents;
     };
 
     TabCollapse.prototype.showAccordion = function(){
@@ -174,8 +182,7 @@
         this.$accordion = $('<div class="panel-group ' + this.options.accordionClass + '" id="' + this.$tabs.attr('id') + '-accordion' +'"></div>');
         this.$tabs.after(this.$accordion);
         this.$tabs.addClass(this.options.tabsClass);
-        var $tabContents = $(this.options.tabContentSelector) || this.$tabs.siblings('.tab-content')
-        $tabContents.addClass(this.options.tabsClass);
+        this.getTabContentElement().addClass(this.options.tabsClass);
     };
 
     TabCollapse.prototype._createAccordionGroup = function(parentId, $heading){
