@@ -88,7 +88,7 @@
         $panelBodies.each(function(){
             var $panelBody = $(this),
                 $tabPane = $panelBody.data('bs.tabcollapse.tabpane');
-            $tabPane.append($panelBody.children('*').detach());
+            $tabPane.append($panelBody.contents().detach());
         });
         this.$accordion.html('');
 
@@ -210,7 +210,7 @@
             groupId = $tabPane.attr('id') + '-collapse',
             $panel = $(this.options.accordionTemplate($heading, groupId, parentId, active));
         $panel.find('.panel-heading > .panel-title').append(this._tabHeadingToPanelHeading($heading, groupId, parentId, active));
-        $panel.find('.panel-body').append($tabPane.children('*').detach())
+        $panel.find('.panel-body').append($tabPane.contents().detach())
             .data('bs.tabcollapse.tabpane', $tabPane);
 
         return $panel;
