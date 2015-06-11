@@ -121,7 +121,19 @@
 
 
     TabCollapse.prototype._initAccordion = function(){
-        this.$accordion = $('<div class="panel-group ' + this.options.accordionClass + '" id="' + this.$tabs.attr('id') + '-accordion' +'"></div>');
+        var randomString = function() {
+            var result = "",
+                possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for( var i=0; i < 5; i++ ) {
+                result += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            return result;
+        };
+
+        var srcId = this.$tabs.attr('id'),
+            accordionId = (srcId ? srcId : randomString()) + '-accordion';
+
+        this.$accordion = $('<div class="panel-group ' + this.options.accordionClass + '" id="' + accordionId +'"></div>');
         this.$tabs.after(this.$accordion);
         this.$tabs.addClass(this.options.tabsClass);
         this.$tabs.siblings('.tab-content').addClass(this.options.tabsClass);
