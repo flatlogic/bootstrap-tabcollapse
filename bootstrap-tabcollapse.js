@@ -56,12 +56,33 @@
         this.$tabs.trigger($.Event('show-tabs.bs.tabcollapse'));
 
         var $panelHeadings = this.$accordion.find('.js-tabcollapse-panel-heading').detach();
+
         $panelHeadings.each(function() {
             var $panelHeading = $(this),
-                $parentLi = $panelHeading.data('bs.tabcollapse.parentLi');
-            view._panelHeadingToTabHeading($panelHeading);
+            $parentLi = $panelHeading.data('bs.tabcollapse.parentLi');
+
+            var $oldHeading = view._panelHeadingToTabHeading($panelHeading);
+
+            $parentLi.removeClass('active');
+            if ($parentLi.parent().hasClass('dropdown-menu') && !$parentLi.siblings('li').hasClass('active')) {
+                $parentLi.parent().parent().removeClass('active');
+            }
+
+            if (!$oldHeading.hasClass('collapsed')) {
+                $parentLi.addClass('active');
+                if ($parentLi.parent().hasClass('dropdown-menu')) {
+                    $parentLi.parent().parent().addClass('active');
+                }
+            } else {
+                $oldHeading.removeClass('collapsed');
+            }
+
             $parentLi.append($panelHeading);
         });
+
+        if (!$('li').hasClass('active')) {
+            $('li').first().addClass('active')
+        }
 
         var $panelBodies = this.$accordion.find('.js-tabcollapse-panel-body');
         $panelBodies.each(function(){
@@ -70,6 +91,20 @@
             $tabPane.append($panelBody.children('*').detach());
         });
         this.$accordion.html('');
+
+        if(this.options.updateLinks) {
+            var $tabContents = $(this.options.tabContentSelector) || this.$tabs.siblings('.tab-content')
+            $tabContents.find('[data-toggle-was="tab"], [data-toggle-was="pill"]').each(function() {
+                var $el = $(this);
+                var href = $el.attr('href').replace(/-collapse$/g, '');
+                $el.attr({
+                    'data-toggle': $el.attr('data-toggle-was'),
+                    'data-toggle-was': '',
+                    'data-parent': '',
+                    href: href
+                });
+            });
+        }
 
         this.$tabs.trigger($.Event('shown-tabs.bs.tabcollapse'));
     };
@@ -85,6 +120,21 @@
             $heading.data('bs.tabcollapse.parentLi', $parentLi);
             view.$accordion.append(view._createAccordionGroup(view.$accordion.attr('id'), $heading.detach()));
         });
+
+        if(this.options.updateLinks) {
+            var parentId = this.$accordion.attr('id');
+            var $selector = this.$accordion.find('.js-tabcollapse-panel-body');
+            $selector.find('[data-toggle="tab"], [data-toggle="pill"]').each(function() {
+                var $el = $(this);
+                var href = $el.attr('href') + '-collapse';
+                $el.attr({
+                    'data-toggle-was': $el.attr('data-toggle'),
+                    'data-toggle': 'collapse',
+                    'data-parent': '#' + parentId,
+                    href: href
+                });
+            });
+        }
 
         this.$tabs.trigger($.Event('shown-accordion.bs.tabcollapse'));
     };
@@ -136,7 +186,8 @@
         this.$accordion = $('<div class="panel-group ' + this.options.accordionClass + '" id="' + accordionId +'"></div>');
         this.$tabs.after(this.$accordion);
         this.$tabs.addClass(this.options.tabsClass);
-        this.$tabs.siblings('.tab-content').addClass(this.options.tabsClass);
+        var $tabContents = $(this.options.tabContentSelector) || this.$tabs.siblings('.tab-content')
+        $tabContents.addClass(this.options.tabsClass);
     };
 
     TabCollapse.prototype._createAccordionGroup = function(parentId, $heading){
