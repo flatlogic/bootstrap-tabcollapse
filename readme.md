@@ -55,10 +55,10 @@ You can also use multiple Bootstrap classes in order to, for example, show accor
 	
 By default, accordion panels do not sync with tabs: the correct panel will be shown based on the active tab, but changing the active accordion panel does not change the active tab.
 To enable tab syncing, pass options as follows:
-	$('#myTab').tabCollapse({
+    $('#myTab').tabCollapse({
         syncTabs: true
     });
-	
+
 Events
 ------------
 
