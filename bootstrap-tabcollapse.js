@@ -42,10 +42,20 @@
     };
 
     TabCollapse.prototype.checkState = function(){
-        if (this.$tabs.is(':visible') && this._accordionVisible){
+        var openTabs = this.$tabs.is(':visible');
+        var openAccordion = this.$accordion.is(':visible');
+
+        if (this.options.breakpoint && this.options.breakpoint > 0) {
+            var windowWidth = window.innerWidth;
+
+            openTabs = windowWidth >= this.options.breakpoint;
+            openAccordion = windowWidth < this.options.breakpoint;
+        }
+
+        if (openTabs && this._accordionVisible){
             this.showTabs();
             this._accordionVisible = false;
-        } else if (this.$accordion.is(':visible') && !this._accordionVisible){
+        } else if (openAccordion && !this._accordionVisible){
             this.showAccordion();
             this._accordionVisible = true;
         }
