@@ -28,7 +28,7 @@
         tabsClass: 'hidden-xs',
         accordionTemplate: function(heading, groupId, parentId, active) {
             return  '<div class="panel panel-default">' +
-                    '   <div class="panel-heading">' +
+                    '   <div class="panel-heading ' + (active ? 'in' : '') +'">' +
                     '      <h4 class="panel-title">' +
                     '      </h4>' +
                     '   </div>' +
