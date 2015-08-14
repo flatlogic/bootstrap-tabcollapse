@@ -124,7 +124,7 @@
         tabId = tabId.substring(0, tabId.length - 9); //remove -collapse from identifier
 
         event.data.tabCollapse.getTabContentElement().find('.active').removeClass('active');
-        $('#' + tabId).addClass('active');
+        $('#' + tabId).addClass('active in');
     }
 
     TabCollapse.prototype.showAccordion = function(){
