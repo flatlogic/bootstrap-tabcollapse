@@ -24,6 +24,7 @@
     };
 
     TabCollapse.DEFAULTS = {
+        accordion: true,
         accordionClass: 'visible-xs',
         tabsClass: 'hidden-xs',
         accordionTemplate: function(heading, groupId, parentId, active) {
@@ -138,9 +139,13 @@
                 $el.attr({
                     'data-toggle-was': $el.attr('data-toggle'),
                     'data-toggle': 'collapse',
-                    'data-parent': '#' + parentId,
-                    href: href
+                    'href': href
                 });
+                if ( this.options.accordion ) {
+                    $el.attr({
+                        'data-parent': '#' + parentId,
+                    });
+                }
             });
         }
 
@@ -161,9 +166,13 @@
         $heading.addClass('js-tabcollapse-panel-heading ' + (active ? '' : 'collapsed'));
         $heading.attr({
             'data-toggle': 'collapse',
-            'data-parent': '#' + parentId,
             'href': '#' + groupId
         });
+        if ( this.options.accordion ) {
+            $heading.attr({
+                'data-parent': '#' + parentId,
+            });
+        }
         return $heading;
     };
 
