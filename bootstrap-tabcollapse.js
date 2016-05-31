@@ -36,7 +36,7 @@
                     '       <div class="panel-body js-tabcollapse-panel-body">' +
                     '       </div>' +
                     '   </div>' +
-                    '</div>'
+                    '</div>';
 
         }
     };
@@ -83,7 +83,7 @@
         });
 
         if (!$('li').hasClass('active')) {
-            $('li').first().addClass('active')
+            $('li').first().addClass('active');
         }
 
         var $panelBodies = this.$accordion.find('.js-tabcollapse-panel-body');
