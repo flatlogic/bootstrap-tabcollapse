@@ -42,10 +42,12 @@
     };
 
     TabCollapse.prototype.checkState = function(){
-        if (this.$tabs.is(':visible') && this._accordionVisible){
+        var hiddenCssClass = this.options.tabsClass;
+
+        if (!this.$tabs.hasClass(hiddenCssClass) && this._accordionVisible){
             this.showTabs();
             this._accordionVisible = false;
-        } else if (this.$accordion.is(':visible') && !this._accordionVisible){
+        } else if (!this.$accordion.hasClass(hiddenCssClass) && !this._accordionVisible){
             this.showAccordion();
             this._accordionVisible = true;
         }
