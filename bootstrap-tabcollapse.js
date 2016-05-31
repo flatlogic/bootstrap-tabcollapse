@@ -1,4 +1,4 @@
-!function ($) {
+(function ($) {
 
     "use strict";
 
@@ -235,5 +235,4 @@
 
     $.fn.tabCollapse.Constructor = TabCollapse;
 
-
-}(window.jQuery);
+})(window.jQuery);
