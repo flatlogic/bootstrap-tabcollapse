@@ -1,0 +1,23 @@
+{
+  "name": "bootstrap-tabcollapse",
+  "version": "1.0.0",
+  "description": "Bootstrap Tab Collapse ======================",
+  "main": "bootstrap-tabcollapse.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GregOnNet/bootstrap-tabcollapse.git"
+  },
+  "keywords": [],
+  "author": "Gregor Woiwode <gregor.woiwode@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GregOnNet/bootstrap-tabcollapse/issues"
+  },
+  "homepage": "https://github.com/GregOnNet/bootstrap-tabcollapse#readme"
+}
