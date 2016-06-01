@@ -9,7 +9,6 @@
         this.options   = options;
         this.$tabs  = $(el);
 
-        this._accordionVisible = false; //content is attached to tabs at first
         this._initAccordion();
         this._checkStateOnResize();
 
@@ -41,16 +40,11 @@
         }
     };
 
-    TabCollapse.prototype.checkState = function(){
-        var hiddenCssClass = this.options.tabsClass;
-
-        if (!this.$tabs.hasClass(hiddenCssClass) && this._accordionVisible){
-            this.showTabs();
-            this._accordionVisible = false;
-        } else if (!this.$accordion.hasClass(hiddenCssClass) && !this._accordionVisible){
-            this.showAccordion();
-            this._accordionVisible = true;
-        }
+    TabCollapse.prototype.checkState = function() {
+      if(this.$accordion.css('display') === 'block')
+        this.showAccordion();
+      else if (this.$tabs.css('display') === 'block')
+        this.showTabs();
     };
 
     TabCollapse.prototype.showTabs = function(){
