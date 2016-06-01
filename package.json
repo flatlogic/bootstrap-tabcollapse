@@ -1,20 +1,21 @@
 {
   "name": "bootstrap-tabcollapse",
-  "version": "1.0.0",
+  "version": "0.3.0",
   "description": "Bootstrap Tab Collapse ======================",
   "main": "bootstrap-tabcollapse.js",
   "directories": {
     "example": "example"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GregOnNet/bootstrap-tabcollapse.git"
   },
-  "keywords": [],
-  "author": "Gregor Woiwode <gregor.woiwode@gmail.com>",
+  "keywords": ["bootstrap", "tabs", "collapse", "tabcollapse", "responsive"],
+  "author":{
+    "name": "okendoken",
+    "url": "http://flatlogic.com"
+  },
+  "contributors": ["Gregor Woiwode <gregor.woiwode@gmail.com>"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/GregOnNet/bootstrap-tabcollapse/issues"
