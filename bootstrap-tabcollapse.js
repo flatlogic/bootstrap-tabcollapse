@@ -55,7 +55,7 @@
         var view = this;
         this.$tabs.trigger($.Event('show-tabs.bs.tabcollapse'));
 
-        var $panelHeadings = this.$accordion.find('.js-tabcollapse-panel-heading').detach();
+        var $panelHeadings = this.$accordion.find('a.js-tabcollapse-panel-heading').detach();
 
         $panelHeadings.each(function() {
             var $panelHeading = $(this),
