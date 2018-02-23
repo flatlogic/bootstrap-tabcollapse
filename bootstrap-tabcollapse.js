@@ -28,7 +28,7 @@
         tabsClass: 'hidden-xs',
         accordionTemplate: function(heading, groupId, parentId, active) {
             return  '<div class="panel panel-default">' +
-                    '   <div class="panel-heading">' +
+                    '   <div class="panel-heading" role="tab">' +
                     '      <h4 class="panel-title">' +
                     '      </h4>' +
                     '   </div>' +
@@ -101,6 +101,7 @@
                     'data-toggle': $el.attr('data-toggle-was'),
                     'data-toggle-was': '',
                     'data-parent': '',
+                    'role': '',
                     href: href
                 });
             });
@@ -139,6 +140,7 @@
                     'data-toggle-was': $el.attr('data-toggle'),
                     'data-toggle': 'collapse',
                     'data-parent': '#' + parentId,
+                    'role': 'button',
                     href: href
                 });
             });
@@ -153,6 +155,7 @@
             'data-toggle': 'tab',
             'href': href,
             'data-parent': ''
+            'role': 'tab',
         });
         return $heading;
     };
@@ -162,6 +165,7 @@
         $heading.attr({
             'data-toggle': 'collapse',
             'data-parent': '#' + parentId,
+            'role': 'button',
             'href': '#' + groupId
         });
         return $heading;
@@ -191,7 +195,7 @@
         var srcId = this.$tabs.attr('id'),
             accordionId = (srcId ? srcId : randomString()) + '-accordion';
 
-        this.$accordion = $('<div class="panel-group ' + this.options.accordionClass + '" id="' + accordionId +'"></div>');
+        this.$accordion = $('<div class="panel-group ' + this.options.accordionClass + '" id="' + accordionId +'" role="tablist" aria-multiselectable="true"></div>');
         this.$tabs.after(this.$accordion);
         this.$tabs.addClass(this.options.tabsClass);
         this.getTabContentElement().addClass(this.options.tabsClass);
