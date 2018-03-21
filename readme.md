@@ -74,6 +74,13 @@ Attach an event handler when **either** tab or collapse is opened:
     $(document).on("shown.bs.collapse shown.bs.tab", ".panel-collapse, a[data-toggle='tab']", function (e) {
         alert('either tab or collapse opened - check arguments to distinguish ' + e);
     });
+    
+How can I support developers?
+------------------------------
+- Star our GitHub repo :star:
+- Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
+- Follow us on [Twitter](https://twitter.com/flatlogic) :feet:
+- Like our page on [Facebook](https://www.facebook.com/flatlogic/) :thumbsup:
 
 Contributors
 ------------
