@@ -36,8 +36,7 @@
                     '       <div class="panel-body js-tabcollapse-panel-body">' +
                     '       </div>' +
                     '   </div>' +
-                    '</div>'
-
+                    '</div>';
         }
     };
 
@@ -81,7 +80,7 @@
         });
 
         if (!$('li').hasClass('active')) {
-            $('li').first().addClass('active')
+            $('li').first().addClass('active');
         }
 
         var $panelBodies = this.$accordion.find('.js-tabcollapse-panel-body');
@@ -117,6 +116,17 @@
         return $tabContents;
     };
 
+    TabCollapse.prototype.tabSync = function (event) {
+        var tabId = event.data.tabCollapse.$accordion.find('.panel-collapse.in').attr('id');
+        if (tabId === undefined || tabId === null) {
+            return;
+        }
+        tabId = tabId.substring(0, tabId.length - 9); //remove -collapse from identifier
+
+        event.data.tabCollapse.getTabContentElement().find('.active').removeClass('active');
+        $('#' + tabId).addClass('active in');
+    }
+
     TabCollapse.prototype.showAccordion = function(){
         this.$tabs.trigger($.Event('show-accordion.bs.tabcollapse'));
 
@@ -129,7 +139,7 @@
             view.$accordion.append(view._createAccordionGroup(view.$accordion.attr('id'), $heading.detach()));
         });
 
-        if(this.options.updateLinks) {
+        if (this.options.updateLinks) {
             var parentId = this.$accordion.attr('id');
             var $selector = this.$accordion.find('.js-tabcollapse-panel-body');
             $selector.find('[data-toggle="tab"], [data-toggle="pill"]').each(function() {
@@ -195,6 +205,9 @@
         this.$tabs.after(this.$accordion);
         this.$tabs.addClass(this.options.tabsClass);
         this.getTabContentElement().addClass(this.options.tabsClass);
+        if (this.options.syncTabs) {
+            this.$accordion.on('shown.bs.collapse', { tabCollapse: this }, this.tabSync);
+        }
     };
 
     TabCollapse.prototype._createAccordionGroup = function(parentId, $heading){
