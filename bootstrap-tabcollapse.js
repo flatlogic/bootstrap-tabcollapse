@@ -1,3 +1,4 @@
+
 !function ($) {
 
     "use strict";
@@ -19,7 +20,7 @@
         // See https://github.com/flatlogic/bootstrap-tabcollapse/issues/23
         var that = this;
         setTimeout(function() {
-          that.checkState();
+            that.checkState();
         }, 0);
     };
 
@@ -28,15 +29,15 @@
         tabsClass: 'hidden-xs',
         accordionTemplate: function(heading, groupId, parentId, active) {
             return  '<div class="panel panel-default">' +
-                    '   <div class="panel-heading">' +
-                    '      <h4 class="panel-title">' +
-                    '      </h4>' +
-                    '   </div>' +
-                    '   <div id="' + groupId + '" class="panel-collapse collapse ' + (active ? 'in' : '') + '">' +
-                    '       <div class="panel-body js-tabcollapse-panel-body">' +
-                    '       </div>' +
-                    '   </div>' +
-                    '</div>'
+                '   <div class="panel-heading ' + (active ? 'active' : '') + '">' +
+                '      <h4 class="panel-title">' +
+                '      </h4>' +
+                '   </div>' +
+                '   <div id="' + groupId + '" class="panel-collapse collapse ' + (active ? 'in' : '') + '">' +
+                '       <div class="panel-body js-tabcollapse-panel-body">' +
+                '       </div>' +
+                '   </div>' +
+                '</div>'
 
         }
     };
@@ -59,7 +60,7 @@
 
         $panelHeadings.each(function() {
             var $panelHeading = $(this),
-            $parentLi = $panelHeading.data('bs.tabcollapse.parentLi');
+                $parentLi = $panelHeading.data('bs.tabcollapse.parentLi');
 
             var $oldHeading = view._panelHeadingToTabHeading($panelHeading);
 
@@ -206,9 +207,17 @@
             tabSelector = tabSelector && tabSelector.replace(/.*(?=#[^\s]*$)/, ''); //strip for ie7
         }
 
+        var activeHead = function(el){
+            $('.panel-heading').removeClass('active');
+            $(el).parents('.panel-heading').addClass('active');
+        }
+
         var $tabPane = $(tabSelector),
             groupId = $tabPane.attr('id') + '-collapse',
             $panel = $(this.options.accordionTemplate($heading, groupId, parentId, active));
+        $panel.find('.panel-heading h4').on('click', function() {
+            $panel.trigger(activeHead($(this)));
+        });
         $panel.find('.panel-heading > .panel-title').append(this._tabHeadingToPanelHeading($heading, groupId, parentId, active));
         $panel.find('.panel-body').append($tabPane.contents().detach())
             .data('bs.tabcollapse.tabpane', $tabPane);
