@@ -80,8 +80,8 @@
             $parentLi.append($panelHeading);
         });
 
-        if (!$('li').hasClass('active')) {
-            $('li').first().addClass('active')
+        if (!$panelHeadings.parent().hasClass('active')) {
+            $panelHeadings.parent().first().addClass('active')
         }
 
         var $panelBodies = this.$accordion.find('.js-tabcollapse-panel-body');
