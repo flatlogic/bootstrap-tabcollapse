@@ -4,6 +4,8 @@ Bootstrap Tab Collapse
 Small bootstrap plugin that switches bootstrap tabs component to collapse component for small screens.
 
 
+[View Demo](http://tabcollapse.okendoken.com/example/example.html) | [Download](https://github.com/flatlogic/bootstrap-tabcollapse.git) | [More templates](https://flatlogic.com/templates) | [Support forum](https://flatlogic.com/forum)
+
 How it works
 ------------
 
@@ -11,8 +13,6 @@ The most obvious way: bootstrap tab collapse generates accordion markup and appe
 When accordion becomes (If accordion is) visible tabcollapse searchs for `.tab-pane` and detaches their content to appropriate
 accordion groups keeping all attached js data.
 Tabs component is given `hidden-xs`-class and accordion component is given `visible-xs`-class. That's it.
-
-**[Demo](http://tabcollapse.okendoken.com/example/example.html)**
 
 Use
 ------------
@@ -74,6 +74,10 @@ Attach an event handler when **either** tab or collapse is opened:
     $(document).on("shown.bs.collapse shown.bs.tab", ".panel-collapse, a[data-toggle='tab']", function (e) {
         alert('either tab or collapse opened - check arguments to distinguish ' + e);
     });
+
+Support
+------------------------------
+For any additional information please go to our [**support forum**](https://flatlogic.com/forum) and raise your questions or feedback provide there. We highly appreciate your participation!
     
 How can I support developers?
 ------------------------------
