@@ -26,8 +26,8 @@
     TabCollapse.DEFAULTS = {
         accordionClass: 'visible-xs',
         tabsClass: 'hidden-xs',
-        accordionTemplate: function(heading, groupId, parentId, active) {
-            return  '<div class="panel panel-default">' +
+        accordionTemplate: function(heading, groupId, panelClass, parentId, active) {
+            return  '<div class="panel '+panelClass+'panel-default">' +
                     '   <div class="panel-heading">' +
                     '      <h4 class="panel-title">' +
                     '      </h4>' +
@@ -208,7 +208,9 @@
 
         var $tabPane = $(tabSelector),
             groupId = $tabPane.attr('id') + '-collapse',
-            $panel = $(this.options.accordionTemplate($heading, groupId, parentId, active));
+            panelClass = $tabPane.attr('class').split(' ').filter(function(e){ return e.indexOf('panel') > -1 }).toString(),
+            $panel = $(this.options.accordionTemplate($heading, groupId, panelClass, parentId, active));
+            
         $panel.find('.panel-heading > .panel-title').append(this._tabHeadingToPanelHeading($heading, groupId, parentId, active));
         $panel.find('.panel-body').append($tabPane.contents().detach())
             .data('bs.tabcollapse.tabpane', $tabPane);
