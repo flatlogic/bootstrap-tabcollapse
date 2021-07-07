@@ -82,6 +82,10 @@
 
         if (!$('li').hasClass('active')) {
             $('li').first().addClass('active')
+        } else {
+            var targetSelector = this.$tabs.find("li.active a").attr("href");
+            this.$tabs.parent().find(".tab-pane").removeClass("active in");
+            $(targetSelector).addClass("active in");
         }
 
         var $panelBodies = this.$accordion.find('.js-tabcollapse-panel-body');
