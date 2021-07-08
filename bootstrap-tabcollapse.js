@@ -55,7 +55,7 @@
         var view = this;
         this.$tabs.trigger($.Event('show-tabs.bs.tabcollapse'));
 
-        var $panelHeadings = this.$accordion.find('.js-tabcollapse-panel-heading').detach();
+        var $panelHeadings = this.$accordion.find('a.js-tabcollapse-panel-heading').detach();
 
         $panelHeadings.each(function() {
             var $panelHeading = $(this),
@@ -209,7 +209,9 @@
         var $tabPane = $(tabSelector),
             groupId = $tabPane.attr('id') + '-collapse',
             $panel = $(this.options.accordionTemplate($heading, groupId, parentId, active));
-        $panel.find('.panel-heading > .panel-title').append(this._tabHeadingToPanelHeading($heading, groupId, parentId, active));
+        var panelHeading = $panel.find('.panel-heading');
+        this._tabHeadingToPanelHeading(panelHeading, groupId, parentId, active);
+        $panel.find('.panel-heading > .panel-title').append($heading);
         $panel.find('.panel-body').append($tabPane.contents().detach())
             .data('bs.tabcollapse.tabpane', $tabPane);
 
