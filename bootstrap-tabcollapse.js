@@ -1,4 +1,4 @@
-!function ($) {
+(function ($) {
 
     "use strict";
 
@@ -9,7 +9,6 @@
         this.options   = options;
         this.$tabs  = $(el);
 
-        this._accordionVisible = false; //content is attached to tabs at first
         this._initAccordion();
         this._checkStateOnResize();
 
@@ -36,19 +35,16 @@
                     '       <div class="panel-body js-tabcollapse-panel-body">' +
                     '       </div>' +
                     '   </div>' +
-                    '</div>'
+                    '</div>';
 
         }
     };
 
-    TabCollapse.prototype.checkState = function(){
-        if (this.$tabs.is(':visible') && this._accordionVisible){
-            this.showTabs();
-            this._accordionVisible = false;
-        } else if (this.$accordion.is(':visible') && !this._accordionVisible){
-            this.showAccordion();
-            this._accordionVisible = true;
-        }
+    TabCollapse.prototype.checkState = function() {
+      if(this.$accordion.css('display') === 'block')
+        this.showAccordion();
+      else if (this.$tabs.css('display') === 'block')
+        this.showTabs();
     };
 
     TabCollapse.prototype.showTabs = function(){
@@ -81,7 +77,7 @@
         });
 
         if (!$('li').hasClass('active')) {
-            $('li').first().addClass('active')
+            $('li').first().addClass('active');
         }
 
         var $panelBodies = this.$accordion.find('.js-tabcollapse-panel-body');
@@ -233,5 +229,4 @@
 
     $.fn.tabCollapse.Constructor = TabCollapse;
 
-
-}(window.jQuery);
+})(window.jQuery);
